@@ -9,6 +9,12 @@ type StartContainerRequest struct {
 	Environment []string `json:"environment"`
 }
 
+// StartContainerResponse represents the response body for the start_container process
+type StartContainerResponse struct {
+	ID       string   `json:"id"`
+	Warnings []string `json:"warnings"`
+}
+
 // ErrorResponse represents the structure of an error API response
 type ErrorResponse struct {
 	Error   bool   `json:"error"`
