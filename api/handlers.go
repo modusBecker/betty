@@ -12,7 +12,7 @@ import (
 
 // handlerGetContainers handles requests for the /get_containers endpoint
 func handlerGetContainers(w http.ResponseWriter, r *http.Request) {
-	containers := orchestration.GetContainerByName
+	containers := orchestration.GetRunningContainers()
 	if containers == nil {
 		fmt.Fprintf(w, "[]")
 		return
