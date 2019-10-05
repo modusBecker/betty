@@ -1,9 +1,10 @@
 package main
 
 import (
-	"betty/api"
 	"flag"
 	"fmt"
+
+	"github.com/teamjorge/betty/api"
 )
 
 func main() {

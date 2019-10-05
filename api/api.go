@@ -1,13 +1,14 @@
 package api
 
 import (
-	"betty/orchestration"
-	"betty/structures"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
+
+	"github.com/teamjorge/betty/orchestration"
+	"github.com/teamjorge/betty/structures"
 )
 
 // handlerGetContainers handles requests for the /get_containers endpoint

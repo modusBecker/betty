@@ -1,8 +1,9 @@
 package orchestration
 
 import (
-	"betty/structures"
 	"context"
+
+	"github.com/teamjorge/betty/structures"
 
 	"github.com/docker/docker/api/types/filters"
 
