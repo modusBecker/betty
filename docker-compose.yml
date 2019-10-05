@@ -1,0 +1,8 @@
+version: '2.1'
+
+services:
+  betty:
+    image: betty
+    build: .
+    ports:
+      - 7000:7000

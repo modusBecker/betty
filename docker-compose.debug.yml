@@ -1,0 +1,10 @@
+version: '2.1'
+
+services:
+  orchestrator:
+    image: betty
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 7000:7000
