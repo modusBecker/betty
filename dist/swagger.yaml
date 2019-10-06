@@ -1,0 +1,174 @@
+swagger: "2.0"
+info:
+  description: "Betty API specification"
+  version: "1.0.0"
+  title: "betty"
+  license:
+    name: "MIT"
+    url: "https://opensource.org/licenses/MIT"
+host: "localhost"
+basePath: "/"
+tags:
+- name: "betty"
+  description: "Docker orchestrator"
+schemes:
+- "http"
+paths:
+  /get_containers:
+    get:
+      tags:
+      - "containers"
+      summary: "Get all containers"
+      description: "Returns a list of all containers"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Container"
+  /get_containers_by_name:
+    get:
+      tags:
+      - "containers"
+      summary: "Get containers by name"
+      description: "Returns a list of all containers with the specified name"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - name: "name"
+          in: "query"
+          description: "name of the container"
+          type: "string"
+          required: true
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Container"
+        400:
+          description: "Error"
+          schema:
+            type: "object"
+            $ref: "#/definitions/ErrorResponse"
+  /start_container:
+    post:
+      tags:
+      - "containers"
+      summary: "Get all containers"
+      description: "Returns a list of all containers"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - name: "id"
+          in: "body"
+          description: "name of the container"
+          type: "string"
+          required: true
+        - name: "image"
+          in: "body"
+          description: "image to use for the container"
+          type: "string"
+          required: true
+        - name: "name"
+          in: "body"
+          description: "name of the container"
+          type: "string"
+          required: true
+        - name: "network"
+          in: "body"
+          description: "network to add the container to"
+          type: "string"
+          required: true
+        - name: "environment"
+          in: "body"
+          description: "environment variables for the container"
+          type: "array"
+          items:
+            type: "string"
+            example: "env_variable=value"
+          required: true
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: "Object"
+            $ref: "#/definitions/StartContainerResponse"
+  /list_networks:
+    get:
+      tags:
+      - "networks"
+      summary: "list all networks"
+      description: "returns a dictionary with **network_id**: **network_name** key-value pairs. \nExample: {\"261efc39f0255fa2983d57dbe99f546d5471ce536ff7c30173cf3141c83291cf\": \"beanut_default\"}"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: "object"
+            $ref: "#/definitions/Network"
+        400:
+          description: "Error"
+          schema:
+            type: "object"
+            $ref: "#/definitions/ErrorResponse"
+definitions:
+  Container:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        description: "container id"
+      image:
+        type: "string"
+        description: "container image"
+      names:
+        type: "string"
+        description: "container names"
+      status:
+        type: "string"
+        description: "container status"
+  Network:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        description: "container id"
+        example: "orchestrator_default"
+  StartContainerResponse:
+    properties:
+      id:
+        type: "string"
+        description: "is an error present"
+      warnings:
+        type: "array"
+        items:
+          type: "string"
+        description: "general context of the error"
+  ErrorResponse:
+    properties:
+      error:
+        type: "boolean"
+        description: "is an error present"
+      message:
+        type: "string"
+        description: "general context of the error"
+      detail:
+        type: "string"
+        description: "error details"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"

@@ -8,6 +8,8 @@ import (
 
 // StartAPI adds handlers and starts up the API server
 func StartAPI(host string, port int) {
+	fs := http.FileServer(http.Dir("./dist"))
+	http.Handle("/", http.StripPrefix("/", fs))
 	http.HandleFunc("/get_containers", handlerGetContainers)
 	http.HandleFunc("/get_container_by_name", handlerGetContainerByName)
 	http.HandleFunc("/start_container", handlerStartContainer)
