@@ -8,6 +8,7 @@
 * Improved Docstrings
 * Kill containers
 * Improve API routing
+* Kubernetes integration
 
 ## Running:
 
