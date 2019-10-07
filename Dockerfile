@@ -11,5 +11,6 @@ RUN go build -o /go/bin/app
 # Now copy it into our base image.
 FROM gcr.io/distroless/base
 COPY --from=build /go/bin/app /
+COPY --from=build /go/src/app/dist /dist
 EXPOSE 7000
 CMD ["/app", "--port", "7000", "--host", "0.0.0.0"]
